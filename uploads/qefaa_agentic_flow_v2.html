@@ -1,0 +1,84 @@
+<style>
+@keyframes q2-stream { to { stroke-dashoffset: -32; } }
+@keyframes q2-in { from { opacity:0; transform:translateY(12px);} to { opacity:1; transform:translateY(0);} }
+@keyframes q2-orbit { to { offset-distance: 100%; } }
+@keyframes q2-ring { 0%{ transform:scale(.85); opacity:.7;} 100%{ transform:scale(1.5); opacity:0;} }
+@keyframes q2-coreglow { 0%,100%{ opacity:.25; transform:scale(.9);} 50%{ opacity:.7; transform:scale(1.12);} }
+@keyframes q2-spin { to { transform: rotate(360deg); } }
+
+.q2-stream { stroke-dasharray: 2 7; animation: q2-stream 1.1s linear infinite; }
+.q2-node { opacity:0; animation: q2-in .55s ease-out forwards; }
+.q2-node rect, .q2-node circle.b { transition: transform .25s ease, filter .25s ease; transform-box: fill-box; transform-origin:center; }
+.q2-node:hover rect, .q2-node:hover circle.b { transform: translateY(-3px) scale(1.04); }
+.q2-loop { stroke-dasharray: 5 7; animation: q2-stream 1.5s linear infinite reverse; transform-box: fill-box; transform-origin:340px 232px; }
+.q2-orbit { offset-path: path('M 340 232 m -94,0 a 94,47 0 1,1 188,0 a 94,47 0 1,1 -188,0'); animation: q2-orbit 3.6s linear infinite; }
+.q2-orbit2 { offset-path: path('M 340 232 m -94,0 a 94,47 0 1,1 188,0 a 94,47 0 1,1 -188,0'); animation: q2-orbit 3.6s linear infinite; animation-delay:-1.8s; }
+.q2-coreglow { transform-box: fill-box; transform-origin:center; animation: q2-coreglow 2.8s ease-in-out infinite; }
+.q2-ring { transform-box: fill-box; transform-origin:center; animation: q2-ring 2.8s ease-out infinite; }
+.q2-ring2 { transform-box: fill-box; transform-origin:center; animation: q2-ring 2.8s ease-out infinite; animation-delay:1.4s; }
+.q2-spin { transform-box: fill-box; transform-origin:center; animation: q2-spin 14s linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .q2-stream,.q2-loop { animation:none; stroke-dasharray:none; }
+  .q2-node { opacity:1; animation:none; }
+  .q2-orbit,.q2-orbit2,.q2-ring,.q2-ring2,.q2-spin { display:none; }
+  .q2-coreglow { animation:none; opacity:.45; }
+}
+.n1{animation-delay:.05s}.n2{animation-delay:.2s}.n3{animation-delay:.55s}.n4{animation-delay:.68s}
+.n5{animation-delay:.81s}.n6{animation-delay:1s}
+</style>
+<svg width="100%" viewBox="0 0 680 480" role="img">
+<title>QEFAA agentic document intelligence — agent reasoning flow</title>
+<desc>Scanned papers enter an agentic core that reasons in a loop, calling tools to parse, embed, retrieve and rank, then assembles a mock exam.</desc>
+<defs>
+<marker id="q2-arr" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M2 1.5L8 5L2 8.5" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<radialGradient id="q2-g"><stop offset="0%" stop-color="#AFA9EC" stop-opacity="1"/><stop offset="60%" stop-color="#7F77DD" stop-opacity=".45"/><stop offset="100%" stop-color="#7F77DD" stop-opacity="0"/></radialGradient>
+<radialGradient id="q2-dot"><stop offset="0%" stop-color="#EEEDFE" stop-opacity="1"/><stop offset="100%" stop-color="#AFA9EC" stop-opacity="0"/></radialGradient>
+</defs>
+
+<g class="q2-node n1">
+<g class="c-gray"><rect x="40" y="28" width="166" height="58" rx="13" stroke-width="0.5"/></g>
+<text class="th" x="123" y="51" text-anchor="middle" dominant-baseline="central">Scanned past papers</text>
+<text class="ts" x="123" y="69" text-anchor="middle" dominant-baseline="central">Unstructured PDF archive</text>
+</g>
+<line x1="206" y1="57" x2="266" y2="125" stroke="#7F77DD" stroke-width="2.2" class="q2-stream" marker-end="url(#q2-arr)"/>
+
+<circle class="q2-ring" cx="340" cy="186" r="62" fill="none" stroke="#7F77DD" stroke-width="1.2" opacity="0"/>
+<circle class="q2-ring2" cx="340" cy="186" r="62" fill="none" stroke="#7F77DD" stroke-width="1.2" opacity="0"/>
+<circle class="q2-coreglow" cx="340" cy="186" r="80" fill="url(#q2-g)"/>
+
+<g class="q2-node n2">
+<g class="c-purple"><circle class="b" cx="340" cy="186" r="60" stroke-width="0.5"/></g>
+<circle cx="340" cy="186" r="60" fill="none" stroke="#AFA9EC" stroke-width="1" stroke-dasharray="3 5" class="q2-spin" opacity="0.5"/>
+<text class="th" x="340" y="176" text-anchor="middle" dominant-baseline="central" style="font-size:14px">Agentic core</text>
+<text class="ts" x="340" y="195" text-anchor="middle" dominant-baseline="central" style="font-size:11px">LangChain + MCP</text>
+<text class="ts" x="340" y="209" text-anchor="middle" dominant-baseline="central" style="font-size:10px">reason · plan · act</text>
+</g>
+
+<ellipse cx="340" cy="232" rx="94" ry="47" fill="none" stroke="#7F77DD" stroke-width="1.5" class="q2-loop" opacity="0.55"/>
+<circle class="q2-orbit" r="9" fill="url(#q2-dot)"/>
+<circle class="q2-orbit" r="3" fill="#EEEDFE"/>
+<circle class="q2-orbit2" r="3" fill="#CECBF6"/>
+<text class="ts" x="340" y="302" text-anchor="middle" style="font-size:10px">tool-calling loop · observe → decide</text>
+
+<line x1="284" y1="208" x2="206" y2="364" stroke="#5DCAA5" stroke-width="1.8" class="q2-stream"/>
+<line x1="332" y1="247" x2="340" y2="364" stroke="#5DCAA5" stroke-width="1.8" class="q2-stream"/>
+<line x1="396" y1="208" x2="474" y2="364" stroke="#5DCAA5" stroke-width="1.8" class="q2-stream"/>
+
+<g class="q2-node n3"><g class="c-teal"><rect x="40" y="364" width="152" height="58" rx="11" stroke-width="0.5"/></g>
+<text class="th" x="116" y="386" text-anchor="middle" dominant-baseline="central" style="font-size:12px">Parse + tag</text>
+<text class="ts" x="116" y="405" text-anchor="middle" dominant-baseline="central" style="font-size:10px">VLM extract · 40% tokens</text></g>
+<g class="q2-node n4"><g class="c-teal"><rect x="264" y="364" width="152" height="58" rx="11" stroke-width="0.5"/></g>
+<text class="th" x="340" y="386" text-anchor="middle" dominant-baseline="central" style="font-size:12px">Embed + retrieve</text>
+<text class="ts" x="340" y="405" text-anchor="middle" dominant-baseline="central" style="font-size:10px">Pinecone semantic</text></g>
+<g class="q2-node n5"><g class="c-teal"><rect x="488" y="364" width="152" height="58" rx="11" stroke-width="0.5"/></g>
+<text class="th" x="564" y="386" text-anchor="middle" dominant-baseline="central" style="font-size:12px">Rank + dedupe</text>
+<text class="ts" x="564" y="405" text-anchor="middle" dominant-baseline="central" style="font-size:10px">difficulty-aware</text></g>
+
+<line x1="400" y1="160" x2="474" y2="92" stroke="#BA7517" stroke-width="2.2" class="q2-stream" marker-end="url(#q2-arr)"/>
+<g class="q2-node n6">
+<g class="c-amber"><rect x="474" y="28" width="166" height="58" rx="13" stroke-width="0.5"/></g>
+<text class="th" x="557" y="51" text-anchor="middle" dominant-baseline="central">Mock exam</text>
+<text class="ts" x="557" y="69" text-anchor="middle" dominant-baseline="central">Official pattern + readiness</text>
+</g>
+</svg>

@@ -1,0 +1,88 @@
+<style>
+@keyframes m2-stream { to { stroke-dashoffset: -32; } }
+@keyframes m2-in { from { opacity:0; transform:translateY(12px);} to { opacity:1; transform:translateY(0);} }
+@keyframes m2-orbit { to { offset-distance: 100%; } }
+@keyframes m2-ring { 0%{ transform:scale(.85); opacity:.7;} 100%{ transform:scale(1.5); opacity:0;} }
+@keyframes m2-coreglow { 0%,100%{ opacity:.25; transform:scale(.9);} 50%{ opacity:.7; transform:scale(1.12);} }
+@keyframes m2-spin { to { transform: rotate(360deg); } }
+
+.m2-stream { stroke-dasharray: 2 7; animation: m2-stream 1.1s linear infinite; }
+.m2-node { opacity:0; animation: m2-in .55s ease-out forwards; }
+.m2-node rect, .m2-node circle.b { transition: transform .25s ease; transform-box: fill-box; transform-origin:center; }
+.m2-node:hover rect, .m2-node:hover circle.b { transform: translateY(-3px) scale(1.04); }
+.m2-loop { stroke-dasharray: 5 7; animation: m2-stream 1.5s linear infinite reverse; }
+.m2-orbit { offset-path: path('M 340 232 m -94,0 a 94,47 0 1,1 188,0 a 94,47 0 1,1 -188,0'); animation: m2-orbit 3.6s linear infinite; }
+.m2-orbit2 { offset-path: path('M 340 232 m -94,0 a 94,47 0 1,1 188,0 a 94,47 0 1,1 -188,0'); animation: m2-orbit 3.6s linear infinite; animation-delay:-1.8s; }
+.m2-coreglow { transform-box: fill-box; transform-origin:center; animation: m2-coreglow 2.8s ease-in-out infinite; }
+.m2-ring { transform-box: fill-box; transform-origin:center; animation: m2-ring 2.8s ease-out infinite; }
+.m2-ring2 { transform-box: fill-box; transform-origin:center; animation: m2-ring 2.8s ease-out infinite; animation-delay:1.4s; }
+.m2-spin { transform-box: fill-box; transform-origin:center; animation: m2-spin 14s linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .m2-stream,.m2-loop { animation:none; stroke-dasharray:none; }
+  .m2-node { opacity:1; animation:none; }
+  .m2-orbit,.m2-orbit2,.m2-ring,.m2-ring2,.m2-spin { display:none; }
+  .m2-coreglow { animation:none; opacity:.45; }
+}
+.n1{animation-delay:.05s}.n2{animation-delay:.2s}.n3{animation-delay:.55s}.n4{animation-delay:.68s}
+.n5{animation-delay:.9s}
+</style>
+<svg width="100%" viewBox="0 0 680 480" role="img">
+<title>More Betters conversational AI — agent reasoning flow</title>
+<desc>Voice or text input enters intent detection, then a coaching agent reasons in a loop using retrieval over user context and a knowledge base, returning personalized plans and reminders.</desc>
+<defs>
+<marker id="m2-arr" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M2 1.5L8 5L2 8.5" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<radialGradient id="m2-g"><stop offset="0%" stop-color="#85B7EB" stop-opacity="1"/><stop offset="60%" stop-color="#378ADD" stop-opacity=".45"/><stop offset="100%" stop-color="#378ADD" stop-opacity="0"/></radialGradient>
+<radialGradient id="m2-dot"><stop offset="0%" stop-color="#E6F1FB" stop-opacity="1"/><stop offset="100%" stop-color="#85B7EB" stop-opacity="0"/></radialGradient>
+</defs>
+
+<g class="m2-node n1">
+<g class="c-gray"><rect x="40" y="24" width="166" height="54" rx="13" stroke-width="0.5"/></g>
+<text class="th" x="123" y="45" text-anchor="middle" dominant-baseline="central">Voice or text input</text>
+<text class="ts" x="123" y="63" text-anchor="middle" dominant-baseline="central">User's own language</text>
+</g>
+<line x1="123" y1="78" x2="123" y2="106" stroke="#7F77DD" stroke-width="2.2" class="m2-stream" marker-end="url(#m2-arr)"/>
+<g class="m2-node n1">
+<g class="c-purple"><rect x="40" y="106" width="166" height="46" rx="11" stroke-width="0.5"/></g>
+<text class="th" x="123" y="129" text-anchor="middle" dominant-baseline="central" style="font-size:12px">Intent detection</text>
+</g>
+<line x1="206" y1="129" x2="268" y2="166" stroke="#7F77DD" stroke-width="2.2" class="m2-stream" marker-end="url(#m2-arr)"/>
+
+<circle class="m2-ring" cx="340" cy="186" r="62" fill="none" stroke="#378ADD" stroke-width="1.2" opacity="0"/>
+<circle class="m2-ring2" cx="340" cy="186" r="62" fill="none" stroke="#378ADD" stroke-width="1.2" opacity="0"/>
+<circle class="m2-coreglow" cx="340" cy="186" r="80" fill="url(#m2-g)"/>
+
+<g class="m2-node n2">
+<g class="c-blue"><circle class="b" cx="340" cy="186" r="60" stroke-width="0.5"/></g>
+<circle cx="340" cy="186" r="60" fill="none" stroke="#85B7EB" stroke-width="1" stroke-dasharray="3 5" class="m2-spin" opacity="0.5"/>
+<text class="th" x="340" y="176" text-anchor="middle" dominant-baseline="central" style="font-size:14px">Coaching agent</text>
+<text class="ts" x="340" y="195" text-anchor="middle" dominant-baseline="central" style="font-size:11px">LLM reasoning</text>
+<text class="ts" x="340" y="209" text-anchor="middle" dominant-baseline="central" style="font-size:10px">reason · retrieve · adapt</text>
+</g>
+
+<ellipse cx="340" cy="232" rx="94" ry="47" fill="none" stroke="#378ADD" stroke-width="1.5" class="m2-loop" opacity="0.55"/>
+<circle class="m2-orbit" r="9" fill="url(#m2-dot)"/>
+<circle class="m2-orbit" r="3" fill="#E6F1FB"/>
+<circle class="m2-orbit2" r="3" fill="#B5D4F4"/>
+<text class="ts" x="340" y="302" text-anchor="middle" style="font-size:10px">retrieval loop · ground → respond</text>
+
+<text class="th" x="186" y="340" text-anchor="middle" style="font-size:12px">Knowledge tools · FastAPI RAG</text>
+<line x1="288" y1="222" x2="232" y2="366" stroke="#5DCAA5" stroke-width="1.8" class="m2-stream"/>
+<line x1="392" y1="222" x2="448" y2="366" stroke="#5DCAA5" stroke-width="1.8" class="m2-stream"/>
+
+<g class="m2-node n3"><g class="c-teal"><rect x="100" y="366" width="176" height="58" rx="11" stroke-width="0.5"/></g>
+<text class="th" x="188" y="388" text-anchor="middle" dominant-baseline="central" style="font-size:12px">User-context memory</text>
+<text class="ts" x="188" y="407" text-anchor="middle" dominant-baseline="central" style="font-size:10px">personal embeddings</text></g>
+<g class="m2-node n4"><g class="c-teal"><rect x="404" y="366" width="176" height="58" rx="11" stroke-width="0.5"/></g>
+<text class="th" x="492" y="388" text-anchor="middle" dominant-baseline="central" style="font-size:12px">Knowledge base</text>
+<text class="ts" x="492" y="407" text-anchor="middle" dominant-baseline="central" style="font-size:10px">health · finance · education</text></g>
+
+<line x1="400" y1="160" x2="474" y2="100" stroke="#BA7517" stroke-width="2.2" class="m2-stream" marker-end="url(#m2-arr)"/>
+<g class="m2-node n5">
+<g class="c-amber"><rect x="474" y="24" width="166" height="118" rx="13" stroke-width="0.5"/></g>
+<text class="th" x="557" y="52" text-anchor="middle" dominant-baseline="central">Personalized output</text>
+<text class="ts" x="557" y="80" text-anchor="middle" dominant-baseline="central" style="font-size:11px">Action plans</text>
+<text class="ts" x="557" y="101" text-anchor="middle" dominant-baseline="central" style="font-size:11px">Reminders</text>
+<text class="ts" x="557" y="122" text-anchor="middle" dominant-baseline="central" style="font-size:11px">Adaptive guidance</text>
+</g>
+</svg>

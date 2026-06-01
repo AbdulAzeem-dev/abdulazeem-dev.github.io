@@ -1,0 +1,71 @@
+<style>
+@keyframes qf-flow { to { stroke-dashoffset: -16; } }
+@keyframes qf-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes qf-pulse { 0%,100% { opacity: .5; } 50% { opacity: 1; } }
+.qf-flow { stroke-dasharray: 4 6; animation: qf-flow 1.4s linear infinite; }
+.qf-node { opacity: 0; animation: qf-in .5s ease-out forwards; }
+.qf-pulse { animation: qf-pulse 2.6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .qf-flow { animation: none; stroke-dasharray: none; }
+  .qf-node { opacity: 1; animation: none; }
+  .qf-pulse { animation: none; opacity: 1; }
+}
+.qf-1 { animation-delay: .05s; } .qf-2 { animation-delay: .18s; }
+.qf-3 { animation-delay: .32s; } .qf-4 { animation-delay: .46s; }
+.qf-5 { animation-delay: .62s; }
+</style>
+<svg width="100%" viewBox="0 0 680 600" role="img">
+<title>QEFAA agentic document intelligence architecture</title>
+<desc>Scanned past papers flow through a vision-language ingestion agent into a Pinecone vector store, then an agentic generator assembles mock exams and readiness scores for students.</desc>
+<defs>
+<marker id="qf-arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M2 1.5L8 5L2 8.5" fill="none" stroke="context-stroke" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+
+<g class="qf-node qf-1">
+<text class="ts" x="150" y="34" text-anchor="middle">Unstructured archive</text>
+<g class="c-gray"><rect x="50" y="46" width="200" height="44" rx="22" stroke-width="0.5"/></g>
+<text class="th" x="150" y="68" text-anchor="middle" dominant-baseline="central">Scanned past papers</text>
+</g>
+
+<line x1="250" y1="68" x2="298" y2="68" stroke="#534AB7" stroke-width="2" class="qf-flow" marker-end="url(#qf-arrow)"/>
+
+<g class="qf-node qf-2">
+<rect class="qf-pulse" x="298" y="38" width="2" height="92" rx="1" fill="#534AB7"/>
+<g class="c-purple"><rect x="306" y="38" width="330" height="96" rx="18" stroke-width="0.5"/></g>
+<text class="th" x="328" y="64">Ingestion agent — VLM + LangChain</text>
+<text class="ts" x="328" y="82">Tool-calling · 40% fewer tokens</text>
+<g class="c-purple"><rect x="328" y="96" width="286" height="28" rx="14" stroke-width="0.5"/></g>
+<text class="ts" x="471" y="111" text-anchor="middle" dominant-baseline="central">Extract · parse · tag · rank difficulty</text>
+</g>
+
+<line x1="471" y1="134" x2="471" y2="172" stroke="#0F6E56" stroke-width="2" class="qf-flow" marker-end="url(#qf-arrow)"/>
+
+<g class="qf-node qf-3">
+<g class="c-teal"><rect x="306" y="172" width="330" height="66" rx="18" stroke-width="0.5"/></g>
+<text class="th" x="471" y="197" text-anchor="middle" dominant-baseline="central">Pinecone vector store</text>
+<text class="ts" x="471" y="217" text-anchor="middle" dominant-baseline="central">Semantic + topic similarity</text>
+</g>
+
+<text class="ts" x="485" y="262" text-anchor="start">Semantic retrieval</text>
+<line x1="340" y1="238" x2="340" y2="286" stroke="#185FA5" stroke-width="2" class="qf-flow" marker-end="url(#qf-arrow)"/>
+
+<g class="qf-node qf-4">
+<g class="c-blue"><rect x="44" y="286" width="592" height="150" rx="22" stroke-width="0.5"/></g>
+<text class="th" x="68" y="314">Agentic exam generator — LangChain + MCP</text>
+<text class="ts" x="68" y="332">Autonomous tool calling · deduplication</text>
+<g class="c-blue"><rect x="68" y="350" width="172" height="66" rx="14" stroke-width="0.5"/></g>
+<text class="ts" x="154" y="383" text-anchor="middle" dominant-baseline="central">Retrieve + dedupe</text>
+<g class="c-blue"><rect x="254" y="350" width="172" height="66" rx="14" stroke-width="0.5"/></g>
+<text class="ts" x="340" y="383" text-anchor="middle" dominant-baseline="central">Assemble paper</text>
+<g class="c-blue"><rect x="440" y="350" width="172" height="66" rx="14" stroke-width="0.5"/></g>
+<text class="ts" x="526" y="383" text-anchor="middle" dominant-baseline="central">Readiness score</text>
+</g>
+
+<line x1="340" y1="436" x2="340" y2="476" stroke="#BA7517" stroke-width="2" class="qf-flow" marker-end="url(#qf-arrow)"/>
+
+<g class="qf-node qf-5">
+<g class="c-amber"><rect x="170" y="476" width="340" height="58" rx="16" stroke-width="0.5"/></g>
+<text class="th" x="340" y="499" text-anchor="middle" dominant-baseline="central">Student mock exam</text>
+<text class="ts" x="340" y="519" text-anchor="middle" dominant-baseline="central">Official pattern · targeted weak-area prep</text>
+</g>
+</svg>

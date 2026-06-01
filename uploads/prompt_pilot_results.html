@@ -1,0 +1,52 @@
+<h2 class="sr-only">Prompt Pilot results: 60% fewer hallucinations, 48% fewer factual errors, 2x BLEU score, and a 3.1% FactScore gain after LoRA fine-tuning of LLaMA 3.2.</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 0.5rem 0 1.5rem;">
+  <div style="background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 1rem;">
+    <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0 0 4px;">Hallucinations</p>
+    <p style="font-size: 24px; font-weight: 500; margin: 0; color: var(--color-text-success);">−60%</p>
+  </div>
+  <div style="background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 1rem;">
+    <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0 0 4px;">Factual errors</p>
+    <p style="font-size: 24px; font-weight: 500; margin: 0; color: var(--color-text-success);">−48%</p>
+  </div>
+  <div style="background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 1rem;">
+    <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0 0 4px;">BLEU score</p>
+    <p style="font-size: 24px; font-weight: 500; margin: 0; color: var(--color-text-info);">2×</p>
+  </div>
+  <div style="background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 1rem;">
+    <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0 0 4px;">FactScore</p>
+    <p style="font-size: 24px; font-weight: 500; margin: 0; color: var(--color-text-info);">+3.1%</p>
+  </div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 10px; font-size: 12px; color: var(--color-text-secondary);">
+  <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #B4B2A9;"></span>Baseline LLaMA 3.2</span>
+  <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #1D9E75;"></span>After LoRA fine-tuning</span>
+</div>
+<div style="position: relative; width: 100%; height: 280px;">
+  <canvas id="ppChart" role="img" aria-label="Grouped bar chart comparing baseline LLaMA 3.2 against the LoRA fine-tuned version across hallucination rate, factual error rate, and BLEU score. Fine-tuning lowers hallucinations and errors and doubles BLEU.">Baseline vs fine-tuned: hallucinations drop 60%, factual errors drop 48%, BLEU doubles.</canvas>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+new Chart(document.getElementById('ppChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Hallucination rate', 'Factual error rate', 'BLEU score'],
+    datasets: [
+      { label: 'Baseline', data: [100, 100, 50], backgroundColor: '#B4B2A9', borderRadius: 6, categoryPercentage: 0.6, barPercentage: 0.8 },
+      { label: 'Fine-tuned', data: [40, 52, 100], backgroundColor: '#1D9E75', borderRadius: 6, categoryPercentage: 0.6, barPercentage: 0.8 }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: (c) => c.dataset.label + ': ' + c.parsed.y + ' (relative)' } }
+    },
+    scales: {
+      y: { beginAtZero: true, max: 110, ticks: { callback: (v) => v + '%', color: '#888780' }, grid: { color: 'rgba(136,135,128,0.15)' } },
+      x: { ticks: { color: '#888780' }, grid: { display: false } }
+    }
+  }
+});
+</script>

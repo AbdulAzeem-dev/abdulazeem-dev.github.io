@@ -1,0 +1,72 @@
+<style>
+@keyframes mb-flow { to { stroke-dashoffset: -16; } }
+@keyframes mb-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes mb-pulse { 0%,100% { opacity: .5; } 50% { opacity: 1; } }
+.mb-flow { stroke-dasharray: 4 6; animation: mb-flow 1.4s linear infinite; }
+.mb-node { opacity: 0; animation: mb-in .5s ease-out forwards; }
+.mb-pulse { animation: mb-pulse 2.6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .mb-flow { animation: none; stroke-dasharray: none; }
+  .mb-node { opacity: 1; animation: none; }
+  .mb-pulse { animation: none; opacity: 1; }
+}
+.mb-1 { animation-delay: .05s; } .mb-2 { animation-delay: .18s; }
+.mb-3 { animation-delay: .32s; } .mb-4 { animation-delay: .46s; }
+.mb-5 { animation-delay: .6s; } .mb-6 { animation-delay: .74s; }
+</style>
+<svg width="100%" viewBox="0 0 680 560" role="img">
+<title>More Betters conversational AI coaching architecture</title>
+<desc>Voice or text input is interpreted by intent detection, enriched by retrieval over user context and a knowledge base, processed by an LLM, and returned as a personalized plan or reminder.</desc>
+<defs>
+<marker id="mb-arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M2 1.5L8 5L2 8.5" fill="none" stroke="context-stroke" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+
+<g class="mb-node mb-1">
+<text class="ts" x="150" y="34" text-anchor="middle">In the user's own language</text>
+<g class="c-gray"><rect x="50" y="46" width="200" height="44" rx="22" stroke-width="0.5"/></g>
+<text class="th" x="150" y="68" text-anchor="middle" dominant-baseline="central">Voice or text input</text>
+</g>
+
+<line x1="250" y1="68" x2="298" y2="68" stroke="#534AB7" stroke-width="2" class="mb-flow" marker-end="url(#mb-arrow)"/>
+
+<g class="mb-node mb-2">
+<g class="c-purple"><rect x="298" y="46" width="190" height="44" rx="22" stroke-width="0.5"/></g>
+<text class="th" x="393" y="68" text-anchor="middle" dominant-baseline="central">Intent detection</text>
+</g>
+
+<line x1="393" y1="90" x2="393" y2="128" stroke="#0F6E56" stroke-width="2" class="mb-flow" marker-end="url(#mb-arrow)"/>
+
+<g class="mb-node mb-3">
+<rect class="mb-pulse" x="44" y="128" width="592" height="2" rx="1" fill="#0F6E56"/>
+<g class="c-teal"><rect x="44" y="138" width="592" height="104" rx="22" stroke-width="0.5"/></g>
+<text class="th" x="68" y="166">Retrieval pipeline — FastAPI</text>
+<text class="ts" x="68" y="184">Grounds the response in personal + domain knowledge</text>
+<g class="c-teal"><rect x="68" y="200" width="266" height="30" rx="15" stroke-width="0.5"/></g>
+<text class="ts" x="201" y="215" text-anchor="middle" dominant-baseline="central">User-context embeddings</text>
+<g class="c-teal"><rect x="346" y="200" width="266" height="30" rx="15" stroke-width="0.5"/></g>
+<text class="ts" x="479" y="215" text-anchor="middle" dominant-baseline="central">Knowledge-base embeddings</text>
+</g>
+
+<line x1="340" y1="242" x2="340" y2="280" stroke="#185FA5" stroke-width="2" class="mb-flow" marker-end="url(#mb-arrow)"/>
+
+<g class="mb-node mb-4">
+<g class="c-blue"><rect x="220" y="280" width="240" height="60" rx="16" stroke-width="0.5"/></g>
+<text class="th" x="340" y="303" text-anchor="middle" dominant-baseline="central">LLM reasoning</text>
+<text class="ts" x="340" y="323" text-anchor="middle" dominant-baseline="central">Personalized coaching response</text>
+</g>
+
+<line x1="340" y1="340" x2="340" y2="378" stroke="#BA7517" stroke-width="2" class="mb-flow" marker-end="url(#mb-arrow)"/>
+
+<g class="mb-node mb-5">
+<g class="c-amber"><rect x="98" y="378" width="222" height="56" rx="16" stroke-width="0.5"/></g>
+<text class="th" x="209" y="400" text-anchor="middle" dominant-baseline="central">Action plans</text>
+<text class="ts" x="209" y="420" text-anchor="middle" dominant-baseline="central">Education · health · finance</text>
+</g>
+<g class="mb-node mb-6">
+<g class="c-amber"><rect x="360" y="378" width="222" height="56" rx="16" stroke-width="0.5"/></g>
+<text class="th" x="471" y="400" text-anchor="middle" dominant-baseline="central">Reminders + guidance</text>
+<text class="ts" x="471" y="420" text-anchor="middle" dominant-baseline="central">Adaptive daily nudges</text>
+</g>
+<line x1="340" y1="378" x2="209" y2="378" stroke="#BA7517" stroke-width="2" class="mb-flow"/>
+<line x1="340" y1="378" x2="471" y2="378" stroke="#BA7517" stroke-width="2" class="mb-flow"/>
+</svg>
