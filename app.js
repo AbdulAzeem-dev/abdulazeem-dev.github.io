@@ -196,6 +196,22 @@
     setInterval(push, 1500);
   })();
 
+  /* ---------- hero avatar parallax + scan ---------- */
+  (function avatarFx(){
+    var frame = $("#avatarFrame");
+    if(!frame) return;
+    if(!reduceMotion && window.matchMedia("(pointer:fine)").matches){
+      var hero = $(".hero");
+      hero.addEventListener("mousemove", function(e){
+        var r = hero.getBoundingClientRect();
+        var px = (e.clientX - r.left)/r.width - .5;
+        var py = (e.clientY - r.top)/r.height - .5;
+        frame.style.transform = "rotateY("+(px*9).toFixed(2)+"deg) rotateX("+(-py*9).toFixed(2)+"deg)";
+      });
+      hero.addEventListener("mouseleave", function(){ frame.style.transform = ""; });
+    }
+  })();
+
 
   /* ============================================================
      ROUTER  —  #/  (home)   ·   #/p/<id>  (case page)
@@ -237,7 +253,7 @@
     document.body.classList.add("route-project");
     window.scrollTo({ top:0, behavior:"auto" });
     var back = $("#backBtn"); if(back) back.focus();
-    document.title = (TITLES[id]||"Project")+" — Sheikh Abdul Azeem";
+    document.title = (TITLES[id]||"Project")+" — Abdul Azeem";
     // re-init any image slots inside the mounted case
     initSlots(mount);
   }
@@ -249,15 +265,23 @@
     a.querySelector(".nm").textContent = TITLES[id];
   }
   function goHome(){
+    var wasProject = document.body.classList.contains("route-project");
     document.body.classList.remove("route-project");
-    document.title = "Sheikh Abdul Azeem — AI / Machine Learning Engineer";
-    window.scrollTo({ top:homeScroll, behavior:"auto" });
+    document.title = "Abdul Azeem — AI / Machine Learning Engineer";
+    // only force-scroll when we actually came back FROM a project view;
+    // otherwise let native anchor (#about etc.) scrolling work on first click
+    if(wasProject){ window.scrollTo({ top:homeScroll, behavior:"auto" }); }
   }
   function route(){
     var h = location.hash || "";
     var m = h.match(/^#\/p\/([\w-]+)$/);
     if(m && $('#case-store > .case[data-case="'+m[1]+'"]')){ openCase(m[1]); }
-    else { goHome(); }
+    else if(h === "" || h === "#/" || h === "#"){ goHome(); }
+    else if(document.body.classList.contains("route-project")){
+      // an in-page anchor was clicked from somewhere — return home without fighting the scroll
+      goHome();
+    }
+    // plain section anchors (#about, #skills…) while already home: do nothing, let the browser scroll
   }
   window.addEventListener("hashchange", route);
 
